@@ -1,0 +1,29 @@
+//not complete
+
+#include <Bounce2.h>
+
+int buttonR = 2;
+int buttonL = 8;
+int ledL = 13;
+int ledR = 3;
+Bounce debouncer = Bounce();
+
+void setup() {
+  pinMode(buttonR,INPUT_PULLUP);
+  pinMode(buttonL,INPUT_PULLUP);
+  debouncer.attach(buttonR);
+  debouncer.attach(buttonL);
+  debouncer.interval(5);
+  Serial.begin(9600);
+}
+
+void loop() {
+  debouncer.update();
+
+  if(debouncer.fell()){
+    Serial.println("Pressed");
+  }
+  if(debouncer.rose()){
+    Serial.println("Released");
+  }
+}
